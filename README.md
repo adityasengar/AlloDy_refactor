@@ -85,3 +85,85 @@ For batch processing or running on a remote server, the CLI is ideal.
     matlab -batch "cd('/path/to/AlloDy_Analysis_Repo/scripts2'); input_md2path; md2pathMain; input_kldiv; kldivMain;"
     ```
     **Note:** The `-batch` flag is essential for non-interactive execution. Ensure your scripts do not contain any `input()` calls, as this will cause an error in batch mode.
+
+
+
+
+# Version & Compatibility
+
+| MATLAB | Status | Notes |
+|--------|--------|-------|
+| R2025b | ✅ OK | Needs 1-line fix (below). |
+| R2024b | ✅ OK | No changes needed in our tests. |
+| R2024a | ✅ OK | One first-run hiccup (see workaround). |
+| R2019b | ❌ Not supported | Not supported by this refactor. |
+
+**Please include your MATLAB version when reporting issues.**
+
+---
+
+## Quick fix for R2025b
+
+`calcPlotOrderParameters.m` may use `size(plots)` where `length` is safer.
+
+**Path:** `scripts2/src/calcPlotOrderParameters.m`
+
+**Change:**
+
+```matlab
+% Old
+nplots = size(plots);
+
+% New
+nplots = length(plots);
+```
+
+**Then run:**
+
+```matlab
+input_md2path; md2pathMain; input_kldiv; kldivMain;
+```
+
+---
+
+## R2024a first-run workaround
+
+If `input_md2path.m` errors on the first run, try again.
+
+If it persists:
+
+```matlab
+restoredefaultpath; rehash toolboxcache;
+input_md2path; md2pathMain; input_kldiv; kldivMain;
+```
+
+---
+
+## Support window
+
+* **Recommended:** R2024a or newer
+* **Minimum likely to work:** R2021b+ (not actively tested)
+* **Not supported:** R2019b
+
+---
+
+## When opening an issue
+
+Include:
+
+* MATLAB version (e.g., R2025b)
+* OS (Linux/Windows/macOS)
+* First ~10 lines of the error
+* Whether you applied the `length(plots)` fix above
+
+---
+
+## Optional guard (to avoid size/length pitfalls)
+
+```matlab
+if ~isscalar(plots)
+    nplots = length(plots);
+else
+    nplots = plots; % already numeric
+end
+```
