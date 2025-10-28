@@ -95,8 +95,8 @@ For batch processing or running on a remote server, the CLI is ideal.
 |--------|--------|-------|
 | R2025b | ✅ OK | Needs 1-line fix (below). |
 | R2024b | ✅ OK | No changes needed in our tests. |
-| R2024a | ✅ OK | One first-run hiccup (see workaround). |
-| R2019b | ❌ Not supported | Not supported by this refactor. |
+| R2024a | ✅ OK | No changes needed in our tests. |
+
 
 **Please include your MATLAB version when reporting issues.**
 
