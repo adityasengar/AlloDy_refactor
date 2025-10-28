@@ -1,4 +1,4 @@
-# AlloDy Analysis Repository
+# AlloCraft Analysis Repository
 
 > **Note:** The current code is a refactored version of the scripts built by Mahdi Hijazi and is mainly refactored from [https://github.com/barth-lab/AlloDy](https://github.com/barth-lab/AlloDy) and [https://github.com/mahdiofhijaz/MDprot](https://github.com/mahdiofhijaz/MDprot).
 
